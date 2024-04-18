@@ -1,0 +1,277 @@
+
+using System.Globalization;
+using System;
+
+/*
+double angleA, angleB, answer;
+string angleAString, angleBString;
+
+
+Console.WriteLine("input  A");
+angleAString = Console.ReadLine();
+angleA = double.Parse(angleAString);
+
+Console.WriteLine("input  B");
+angleBString = Console.ReadLine();
+angleB = double.Parse(angleBString);
+
+answer = Math.Sqrt(Math.Pow(angleA,2) + Math.Pow(angleB,2));
+
+String name = "gerald";
+
+name = name.Replace("e", "a");
+
+
+
+//double b = Math.Round(a);
+
+//Console.WriteLine(answer); 
+Console.WriteLine(name);
+
+
+
+Console.WriteLine("What day?");
+string day = Console.ReadLine();
+
+switch (day)
+{
+    case "Monday":
+        Console.WriteLine("Wag pumasok");
+        break;
+
+    default:
+        Console.WriteLine("Mali lagay mo");
+        break;
+}
+
+
+Console.WriteLine("temp outside: ");
+
+double temp = Convert.ToDouble(Console.ReadLine());
+
+if (temp <= 30 && temp >= 10)
+{
+    Console.WriteLine("TABI MAINETTT!!");
+}
+else
+{
+    Console.WriteLine("superlamig");
+}
+
+
+Console.WriteLine("Your first name is: ");
+string first_name = Console.ReadLine();
+
+while (first_name == "")
+{
+    Console.WriteLine("Your first name is: ");
+     first_name = Console.ReadLine();
+}
+Console.WriteLine(first_name);
+
+
+
+Random rnd_num = new Random();  
+bool playAgain = true;
+int min_num = 1;
+int max_num = 100;
+int guess;
+int guesses;
+int number;
+string response;
+
+while (playAgain)
+{
+    guess = 0;
+    guesses = 0;
+    response = "";
+    number = rnd_num.Next(min_num, max_num);
+
+    while (guess != number)
+    { 
+      Console.WriteLine("Guess the number between " + min_num + " + " + max_num + " :");
+        guess = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("guess: " + guess);
+
+        if (guess > number)
+
+        {
+            Console.WriteLine(guess + " is high");    
+        }
+        else if (guess < number) 
+        {
+            Console.WriteLine(guess + " is low");
+        }
+
+        guesses++;
+    }
+    Console.WriteLine("Number: " + number);
+    Console.WriteLine("YOU WIN");
+    Console.WriteLine("Guesses: " + guesses);
+
+    Console.WriteLine("Wold you like to play again? (Y/N)");
+    response = Console.ReadLine();
+    response = response.ToUpper();
+
+    if (response == "y")
+    {
+        playAgain = true;
+    }
+    else if (response == "n")
+    {
+        playAgain = false;
+    }
+    else 
+    {
+        playAgain = false;
+    }
+
+     
+}
+
+Console.WriteLine("ty");
+Console.ReadKey();
+
+
+
+string[] fruits = { "banaa", "apl", "omrange" };
+
+for (int i = 0; i < fruits.Length; i++)
+{
+    Console.WriteLine(fruits[i]);
+}
+
+
+//Console.WriteLine(fruits.Length);
+
+Console.ReadKey();
+
+
+static void getNum(int min)
+{ 
+  Random rndNumGen = new Random();
+
+    int random = rndNumGen.Next(min,100);
+    Console.WriteLine(random);
+}
+
+
+getNum(90);
+
+
+
+
+
+class Car
+{
+    //FIELD
+    public string color;
+    public string brand;
+    public int yearCreated;
+
+
+    public void displayInfo()
+    {
+        Console.WriteLine($"{color}");
+    }
+
+    public string carColor
+    {
+        get
+        {
+            return color;
+        }
+    }
+
+}
+
+class startProgram
+{
+    static void Main(string[] args)
+    {
+        Car myCar = new Car();
+
+        myCar.color = "blue";
+
+        myCar.displayInfo();
+        Console.WriteLine(myCar.carColor);
+
+        
+    }   
+}
+
+
+//Car myCar = new Car(); obj creation  
+
+
+String[] CarList = { "toyota", "nissan", "mitsubishi" };
+
+for (int i = 0; i <= CarList.Length; i++)
+{
+    Console.WriteLine(CarList[i]);
+}
+
+class mainProg
+{
+
+        static void Main(string[] args)
+        {
+        Console.WriteLine("inout a homie call: ");
+        string greet = Console.ReadLine();
+            SomeMethod(greet);
+            SomeMethod(greet);
+        }
+
+
+    //method taawag nila pero function sakin 
+    static void SomeMethod(string greeting)
+    {
+        //do something here
+
+        Console.WriteLine("wazuup " + greeting);
+    }
+
+}
+*/
+
+class mainProg
+{
+    static void Main(string[] args)
+    {
+        double FirstNum;
+        double Secnum;
+        double result;
+
+
+        Console.WriteLine("input num 1: ");
+        FirstNum = Convert.ToDouble(Console.ReadLine());
+
+
+        Console.WriteLine("input num 2: ");
+         Secnum = Convert.ToDouble(Console.ReadLine());
+
+        result = multi(FirstNum, Secnum);
+
+        Console.WriteLine("The product is: " + result);
+
+    }
+
+    static double multi(double num1, double num2)
+    { 
+      double product = num1 * num2;
+
+        return product;
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+
+

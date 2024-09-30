@@ -1,0 +1,31 @@
+DECLARE
+BEGIN
+FOR A IN 1..10
+LOOP
+    FOR B IN 1..10
+    LOOP
+    DBMS_OUTPUT.PUT(B*A);
+    DBMS_OUTPUT.PUT('       ');
+    END LOOP;
+DBMS_OUTPUT.PUT_LINE('');
+END LOOP;
+END;
+
+
+
+DECLARE
+B NUMBER:=&B;
+A NUMBER;
+
+BEGIN
+
+FOR A IN 1..15
+LOOP
+DBMS_OUTPUT.PUT(B*A);
+dbms_output.put('   ');
+END LOOP;
+dbms_output.put_line(' ');
+
+
+
+END;

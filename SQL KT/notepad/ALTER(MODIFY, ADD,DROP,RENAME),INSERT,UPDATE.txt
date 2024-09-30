@@ -1,0 +1,35 @@
+
+--column to be modified must be empty to change datatype
+ALTER TABLE DEPT_SAM
+MODIFY (CREATE_DATE DATE NOT NULL );
+
+___________________________________
+
+ALTER TABLE DEPT_SAM
+ADD (LOCATIONS VARCHAR(20));
+
+___________________________________
+
+ALTER TABLE DEPT_SAM
+DROP COLUMN LOCATIONS;
+
+___________________________________
+
+ALTER TABLE SAMPLE_TBL
+RENAME COLUMN SEX TO GENDER;
+
+___________________________________
+
+INSERT INTO DEPT_SAM (DEPTNO, DNAME, LOC)
+     VALUES (100, 'SAM', 'LAGUNA');
+
+___________________________________
+
+UPDATE DEPT_SAM
+SET SEX= 'F', ADDRESS='LAGUNA', EMAIL= '123@456', DEPT_ID= 3
+WHERE DEPTNO= 300
+
+____________________________________
+
+DELETE FROM DEPT_SAM
+WHERE DEPTNO = 600

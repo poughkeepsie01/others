@@ -1,0 +1,42 @@
+SELECT DISTINCT DEPARTMENT_ID FROM EMPLOYEES;
+
+__________________________________________
+
+ SELECT *
+    FROM EMPLOYEES
+   WHERE SALARY BETWEEN 5000 AND 10000
+ORDER BY SALARY;
+
+__________________________________________
+
+SELECT *
+  FROM EMPLOYEES
+ WHERE FIRST_NAME IN ('Kevin', 'Charles');
+
+__________________________________________
+
+SELECT *
+  FROM EMPLOYEES
+ WHERE FIRST_NAME LIKE '%h%_l';
+
+__________________________________________
+
+SELECT *
+  FROM EMPLOYEES
+ WHERE COMMISSION_PCT IS NULL;
+
+__________________________________________
+
+SELECT LAST_NAME, JOB_ID, SALARY
+  FROM EMPLOYEES
+ WHERE JOB_ID = 'AD_PRES' AND SALARY > 15000;
+
+__________________________________________
+
+SELECT LAST_NAME, JOB_ID, SALARY
+  FROM EMPLOYEES
+ WHERE JOB_ID = 'AD_PRES' OR SALARY > 15000;
+
+___________________________________________
+
+

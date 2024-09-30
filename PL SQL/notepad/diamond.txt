@@ -1,0 +1,40 @@
+DECLARE
+   a   NUMBER;
+   b   NUMBER;
+   c   NUMBER := &a;
+   d   NUMBER;
+BEGIN
+
+   FOR a IN 1 .. c
+   LOOP
+      FOR b IN 1 .. c - a
+      LOOP
+         DBMS_OUTPUT.PUT(' ');
+      END LOOP;
+
+      FOR d IN 1 .. a
+      LOOP
+         DBMS_OUTPUT.PUT('*');
+        END LOOP;
+      DBMS_OUTPUT.NEW_LINE;
+   END LOOP;
+   
+   
+       
+     FOR a IN REVERSE 1 .. c
+   LOOP
+      FOR b IN 1 .. c - a
+      LOOP
+         DBMS_OUTPUT.PUT(' ');
+      END LOOP;
+
+      FOR d IN REVERSE 1 .. a
+      LOOP
+         DBMS_OUTPUT.PUT('*');
+        END LOOP;
+      DBMS_OUTPUT.NEW_LINE;
+   END LOOP;
+   
+   
+   
+END;

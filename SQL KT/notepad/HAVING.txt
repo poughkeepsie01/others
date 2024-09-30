@@ -1,0 +1,6 @@
+SELECT count(month), month,employee_number
+FROM xxtip_Sss_contributions
+where year = 2022
+group by month,employee_number
+having count(month) > 1
+order by count(month) desc

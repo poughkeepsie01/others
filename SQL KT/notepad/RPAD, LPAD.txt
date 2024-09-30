@@ -1,0 +1,31 @@
+RPAD('tech', 7)
+Result: 'tech   '
+
+RPAD('tech', 2)
+Result: 'te'
+
+RPAD('tech', 8, '0')
+Result: 'tech0000'
+
+RPAD('tech on the net', 15, 'z')
+Result: 'tech on the net'
+
+RPAD('tech on the net', 16, 'z')
+Result: 'tech on the netz'
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+LPAD('tech', 7);
+Result: '   tech'
+
+LPAD('tech', 2);
+Result: 'te'
+
+LPAD('tech', 8, '0');
+Result: '0000tech'
+
+LPAD('tech on the net', 15, 'z');
+Result: 'tech on the net'
+
+LPAD('tech on the net', 16, 'z');
+Result: 'ztech on the net'

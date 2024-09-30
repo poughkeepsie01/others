@@ -1,0 +1,86 @@
+SUBSTR( string, start_position [, length ] )
+
+EX: SUBSTR('This is a test', 6, 2)
+
+= 'is'
+
+EX: SUBSTR('This is a test', 6)
+
+= 'is a test'
+
+
+
+/*-----------------------------------------------------*/
+SELECT product_name, LTRIM(product_name, 'Monitor ') "Short Name"
+   FROM products
+   WHERE product_name LIKE 'Monitor%';
+
+PRODUCT_NAME         Short Name
+-------------------- ----------
+Monitor 17/HR        17/HR
+Monitor 17/HR/F      17/HR/F
+
+
+
+/*-------------------------------------------------------*/
+SELECT
+  product_name,
+  RTRIM(product_name,'V12345679') short_name
+FROM
+  products
+WHERE
+  product_name LIKE '%V_'
+ORDER BY
+  product_name; 
+
+PRODUCT_NAME         Short Name
+-------------------- ---------------
+IntelXeon E5-1650 V3  IntelXeon E5-1650
+IntelXeon E5-1650 V4  IntelXeon E5-1650
+
+
+-----------------------------------------------------------------
+
+LTRIM('   tech')
+Result: 'tech'
+
+LTRIM('   tech', ' ')
+Result: 'tech'
+
+LTRIM('000123', '0')
+Result: '123'
+
+LTRIM('123123Tech', '123')
+Result: 'Tech'
+
+LTRIM('123123Tech123', '123')
+Result: 'Tech123'
+
+LTRIM('xyxzyyyTech', 'xyz')
+Result: 'Tech'
+
+LTRIM('6372Tech', '0123456789')
+Result: 'Tech'
+
+---------------------------------------------------------------------------
+
+RTRIM('tech   ')
+Result: 'tech'
+
+RTRIM('tech   ', ' ')
+Result: 'tech'
+
+RTRIM('123000', '0')
+Result: '123'
+
+RTRIM('Tech123123', '123')
+Result: 'Tech'
+
+RTRIM('123Tech123', '123')
+Result: '123Tech'
+
+RTRIM('Techxyxzyyy', 'xyz')
+Result: 'Tech'
+
+RTRIM('Tech6372', '0123456789')
+Result: 'Tech'

@@ -1,0 +1,10 @@
+ MOUNTAIN_INSERT ('&V_MT_ID', 
+                '&V_MOUNTAIN',
+                '&V_LOCATIONS',
+                '&V_SLOTS',
+                '&V_AVAILABLE_DATE',
+                '&V_PACKAGE_RATE',
+                '&V_DIFFICULTY',
+                '&V_ELEVATION',
+                '&V_ITINERARY',
+                '&V_INFORMATION');

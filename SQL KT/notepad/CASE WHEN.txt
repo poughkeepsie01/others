@@ -1,0 +1,19 @@
+SELECT FIRST_NAME,
+       JOB_ID,
+       CASE JOB_ID WHEN 'IT_PROG' THEN 'programmer' ELSE 'not programmer' END
+          WHATAREYOU
+  FROM EMPLOYEES;
+
+
+__________________________________________
+
+SELECT FIRST_NAME,
+       SALARY,
+       CASE
+          WHEN SALARY < 5000 THEN 'c'
+          WHEN SALARY BETWEEN 5000 AND 15000 THEN 'b'
+          WHEN SALARY BETWEEN 15000 AND 20000 THEN 'a'
+          ELSE 's'
+       END
+          SALARY_RATE
+  FROM EMPLOYEES;

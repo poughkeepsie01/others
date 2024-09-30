@@ -1,0 +1,28 @@
+CREATE TABLE DEPT_SAM
+(
+   DEPTNO        NUMBER (2),
+   DNAME         VARCHAR2 (14),
+   LOC           VARCHAR2 (13),
+   CREATE_DATE   DATE DEFAULT SYSDATE
+);
+
+_______________________________________________
+
+CREATE TABLE DEPT_SAMIRA (
+                EMPLOYEE_ID 		NUMBER(9) ,
+                DEPARTMENT_ID 		NUMBER(6),
+                FULL_NAME VARCHAR2(25) 	NOT NULL,
+                AGE NUMBER(2) 		NOT NULL,
+                JOB_NAME 		VARCHAR2(25),
+                EMAIL 			VARCHAR2(25),
+                CONSTRAINT A_FK FOREIGN KEY(DEPARTMENT_ID)
+                                REFERENCES DEPARTMENTS(DEPARTMENT_ID),
+                CONSTRAINT B_UK UNIQUE(EMAIL))
+
+________________________________________________
+
+TRUNCATE TABLE SAMPLE_TBL
+
+DELETE SAMPLE_TBL
+
+DROP TABLE SAMPLE_TBL

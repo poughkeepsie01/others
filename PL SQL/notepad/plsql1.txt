@@ -1,0 +1,93 @@
+declare 
+v_fname varchar2(25);
+v_salary number;
+
+begin
+select salary, first_name
+into v_salary,v_fname from employees
+where first_name= '&v_fname';
+dbms_output.put_line(v_fname||'''s salary: '||v_salary);
+end;
+
+select*from employees
+where first_name in ('John','Samira','Lex') or first_name like 'S%';
+
+
+declare
+v_salary    number;
+v_hiredate date;
+begin
+select salary , hire_date
+into v_salary, v_hiredate
+from employees
+where employee_id=100;
+dbms_output.put_line('salary: '||v_salary*2);
+dbms_output.put_line('Hire_date: '||(to_char(v_hiredate,'mm/yyyy')));
+end;
+
+
+declare
+
+c_id customers.id%type:= 1;
+c_name customers.name%type;
+c_addr customers.address%type;
+c_sal customers.salary%type;
+
+begin
+    select name, address, salary 
+    into c_name, c_addr, c_sal
+    from customers
+    where id= c_id;
+    
+   dbms_output.put_line('Customer '||c_name||' from '||c_addr||'earns '||c_sal);
+end;
+
+
+
+
+
+
+
+
+
+________________________________________________________
+
+
+
+
+
+
+DECLARE
+   v_salary1   NUMBER;
+   v_salary2   NUMBER;
+   v_fname1    VARCHAR2 (25);
+   v_fname2    VARCHAR2 (25);
+   v_lname1    VARCHAR2 (25);
+   v_lname2    VARCHAR2 (25);
+   v_empID1     number;
+   v_empID2     number;
+BEGIN
+   SELECT salary, first_name,last_name
+     INTO v_salary1, v_fname1,v_lname1
+     FROM employees
+    WHERE employee_id = '&v_empID1';
+
+   SELECT salary, first_name,last_name
+     INTO v_salary2, v_fname2,v_lname2
+     FROM employees
+    WHERE employee_id = '&v_empID2';
+
+   IF v_salary1 > v_salary2
+   THEN
+      DBMS_OUTPUT.put_line (
+         v_fname1||' '||v_lname1 || ' has a greater salary than ' || v_fname2||' '||v_lname2);
+   ELSIF v_salary1 < v_salary2
+   THEN
+      DBMS_OUTPUT.put_line (
+         v_fname2 ||' '||v_lname2||' has a greater salary than '|| v_fname1||' '||v_lname1 );
+   ELSE
+      DBMS_OUTPUT.put_line (
+         v_fname1||' '||v_lname1 || ' and ' || v_fname2 ||' '||v_lname2|| ' have the same salary.');
+   END IF;
+END;
+

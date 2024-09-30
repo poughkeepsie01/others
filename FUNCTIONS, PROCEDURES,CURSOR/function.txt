@@ -1,0 +1,21 @@
+DECLARE 
+NUM1 NUMBER:= '&NUM1';
+NUM2 NUMBER:= '&NUM2';
+NUM3 VARCHAR2(10):= '&OP';
+NUM4 NUMBER;
+
+BEGIN
+
+NUM4:= KT_CALCU_3(NUM1, NUM2, NUM3 );
+DBMS_OUTPUT.PUT_LINE( NUM4);
+
+END;
+
+----------------------------------------------employee_id(function)
+
+DECLARE
+   RESULT   NUMBER;
+BEGIN
+   RESULT := P_GET_SAL1 (331);
+   DBMS_OUTPUT.PUT_LINE (RESULT);
+END;

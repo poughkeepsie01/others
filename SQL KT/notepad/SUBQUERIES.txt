@@ -1,0 +1,19 @@
+SELECT *
+  FROM EMPLOYEES
+ WHERE DEPARTMENT_ID = (SELECT DEPARTMENT_ID
+                          FROM DEPARTMENTS
+                         WHERE DEPARTMENT_ID = 20);
+
+__________________________________________________________
+
+
+SELECT E.FIRST_NAME, D.DEPARTMENT_NAME, J.JOB_TITLE
+  FROM EMPLOYEES E
+       JOIN DEPARTMENTS D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+       JOIN JOBS J ON E.JOB_ID = J.JOB_ID
+ WHERE D.DEPARTMENT_NAME = (SELECT DEPARTMENT_NAME
+                              FROM DEPARTMENTS
+                             WHERE DEPARTMENT_ID = 30);
+
+___________________________________________________________
+

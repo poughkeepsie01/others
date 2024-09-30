@@ -1,0 +1,100 @@
+___________________________________________________________--not so diamond
+DECLARE
+   n   NUMBER := 10;
+   i   NUMBER := 1;
+   j   NUMBER;
+   k   NUMBER;
+BEGIN
+   WHILE i < n
+   LOOP
+      j := 1;
+
+      WHILE j < n - i
+      LOOP
+         DBMS_OUTPUT.put (' ');
+         j := j + 2;
+      END LOOP;
+
+      FOR k IN 1 .. i
+      LOOP
+         DBMS_OUTPUT.put ('*');
+      END LOOP;
+
+      DBMS_OUTPUT.new_line;
+      i := i + 2;
+   END LOOP;
+
+   i := 7;
+
+   WHILE i >= 1
+   LOOP
+      j := 9;
+
+      WHILE j > i
+      LOOP
+         DBMS_OUTPUT.put (' ');
+         j := j - 2;
+      END LOOP;
+
+      FOR k IN 1 .. i
+      LOOP
+         DBMS_OUTPUT.put ('*');
+      END LOOP;
+
+      DBMS_OUTPUT.new_line;
+      i := i - 2;
+   END LOOP;
+END;
+
+
+_____________________________________________________________________________________--RIGHT _\ /_
+
+DECLARE
+   a   NUMBER;
+   b   NUMBER;
+   c   NUMBER := &a;
+   d   NUMBER;
+BEGIN
+   FOR a IN 1 .. c
+   LOOP
+      FOR b IN 1 .. a
+      LOOP
+         DBMS_OUTPUT.put ('*');
+      END LOOP;
+
+      DBMS_OUTPUT.put_line (' ');
+   END LOOP;
+
+   FOR a IN 1 .. c
+   LOOP
+      FOR b IN 1 .. c - a
+      LOOP
+         DBMS_OUTPUT.PUT ('  ');
+      END LOOP;
+
+      FOR d IN 1 .. a
+      LOOP
+         DBMS_OUTPUT.PUT ('*');
+      END LOOP;
+
+      DBMS_OUTPUT.NEW_LINE;
+   END LOOP;
+END;
+
+
+_______________________________________________________________________________divisible by 3
+
+
+ DECLARE 
+ A NUMBER:= (0);
+BEGIN
+FOR I IN 0..100
+LOOP
+     A:=A + 1;
+IF MOD(A , 3)  = 0 THEN
+    DBMS_OUTPUT.PUT_LINE(A);
+ELSE
+    DBMS_OUTPUT.PUT_LINE('');
+    END IF;
+    END LOOP;
+    END;

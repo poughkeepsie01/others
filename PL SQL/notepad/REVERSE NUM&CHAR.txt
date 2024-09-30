@@ -1,0 +1,34 @@
+__________________________________
+REVERSE A NUMBER
+__________________________________
+DECLARE
+NUM NUMBER;
+REVERSE_NUM NUMBER:=0;
+
+BEGIN
+NUM:=&NUM;
+WHILE NUM>0
+LOOP
+REVERSE_NUM:=(REVERSE_NUM*10) + MOD(NUM,10);
+NUM:=TRUNC(NUM/10);
+END LOOP;
+
+DBMS_OUTPUT.PUT_LINE(REVERSE_NUM);
+
+END;
+
+__________________________________________
+REVERSE A CHARACTER
+__________________________________________
+
+DECLARE
+   INPUT   VARCHAR2 (20) := '&NAME';
+   REV     VARCHAR2 (50) := '';
+BEGIN
+   FOR I IN REVERSE 1 .. LENGTH (INPUT)
+   LOOP
+      REV := REV || SUBSTR (INPUT, I, 1);
+   END LOOP;
+
+   DBMS_OUTPUT.PUT_LINE (REV);
+END;

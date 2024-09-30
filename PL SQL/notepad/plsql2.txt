@@ -1,0 +1,107 @@
+declare
+
+v_salary customers.salary%type;
+v_empID customers.id%type;
+v_Ename customers.name%type;
+begin
+        select salary, name
+        into v_salary,v_Ename
+         from customers 
+        where id= '&v_empID';
+
+if v_salary < 3000
+then 
+
+    update customers
+    set salary= salary+1000;
+    dbms_output.put_line('Salary updated!');
+    else
+    dbms_output.put_line('Employee '||v_Ename||' has a salary of '||v_salary||';');
+    dbms_output.put_line('Not qualified');
+  end if;
+  end;
+
+-----------OR------------------------------------------
+
+DECLARE
+   c_id    customers.id%TYPE ;
+   c_sal   customers.salary%TYPE;
+BEGIN
+   SELECT salary
+     INTO c_sal
+     FROM customers
+    WHERE id = '&c_id';
+
+   IF (c_sal <= 2000)
+   THEN
+      UPDATE customers
+         SET salary = salary + 1000;
+     
+
+      DBMS_OUTPUT.put_line ('Salary updated!');
+      else
+      DBMS_OUTPUT.put_line ('No way!');
+   END IF;
+END;
+
+_____________________________________basic loop
+					      <|				
+DECLARE
+v_num number;
+   x   NUMBER := '&v_num';
+BEGIN
+   LOOP
+      DBMS_OUTPUT.put_line (x);
+      x := x + 1;
+      EXIT WHEN x = 10;
+   END LOOP;
+
+END;
+
+____________________________________________while loop
+						    <|
+
+DECLARE
+   a   NUMBER (2) := 1;
+BEGIN
+   WHILE a <= 10
+   LOOP
+      DBMS_OUTPUT.put_line ('value of a: ' || a);
+      a := a + 1;
+   END LOOP;
+END;
+
+___________________________________________for loop
+						  <|
+DECLARE
+   a   NUMBER (2);
+BEGIN
+   FOR a IN 1..10
+   LOOP
+      DBMS_OUTPUT.put_line ( a);
+   END LOOP;
+END;
+
+__________________________________________
+
+--dispaly odd numbers
+
+
+
+declare
+b number(2):=1;
+begin
+for a in 1..10
+loop
+DBMS_OUTPUT.PUT_LINE(B);
+b:=b+2;
+end loop;
+end;
+___________________________________________________
+--rowid
+
+delete from tbl_eis_test 
+where rowid in (select max(rowid) from tbl_eis_test
+                group by invoiceuid);
+
+

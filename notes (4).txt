@@ -1,0 +1,372 @@
+-------------------
+url for this doc is
+-------------------
+https://tinyurl.com/3yctkbc4
+
+
+
+-----------------------
+how to connect
+------------------------
+
+
+https://ouconnect.oracle.com/
+
+Enter in user name: 98766421.user01 ... 98766421.user30
+Enter in password: oh76OIMUR2 (same for all users)
+
+
+Your GESDB Event Id is, 98766421
+
+The default credentials are :
+oracle user password is OU08182025
+root user password is OU98766521 (OU<GESDB Event ID+100>)
+
+
+--------------
+Activity Guide
+--------------
+https://tinyurl.com/3apwuwar
+
+--------------
+Student Guide
+--------------
+https://tinyurl.com/yc25ujc4
+
+-------
+Day 3
+-------
+
+------- dbms_metadata.get_ddl -----
+
+set long 100000
+set pagesize 0
+select dbms_metadata.get_ddl('TABLE', 'ORDERS', 'OE') from dual
+/
+
+
+------ Explain plan / execution plan------------------
+explain plan for
+select *
+from customers
+where customer_id = :cust
+/
+
+set lines 100
+
+select *
+from table (dbms_xplan.display)
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------
+Plan hash value: 4238351645
+
+--------------------------------------------------------------------------------------------
+| Id  | Operation		    | Name	   | Rows  | Bytes | Cost (%CPU)| Time	   |
+--------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT	    |		   |	 1 |   177 |	 1   (0)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID| CUSTOMERS    |	 1 |   177 |	 1   (0)| 00:00:01 |
+|*  2 |   INDEX UNIQUE SCAN	    | CUSTOMERS_PK |	 1 |	   |	 0   (0)| 00:00:01 |
+--------------------------------------------------------------------------------------------
+
+Predicate Information (identified by operation id):
+
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------
+Plan hash value: 4238351645
+
+--------------------------------------------------------------------------------------------
+| Id  | Operation		    | Name	   | Rows  | Bytes | Cost (%CPU)| Time	   |
+--------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT	    |		   |	 1 |   177 |	 1   (0)| 00:00:01 |
+|   1 |  TABLE ACCESS BY INDEX ROWID| CUSTOMERS    |	 1 |   177 |	 1   (0)| 00:00:01 |
+|*  2 |   INDEX UNIQUE SCAN	    | CUSTOMERS_PK |	 1 |	   |	 0   (0)| 00:00:01 |
+--------------------------------------------------------------------------------------------
+
+Predicate Information (identified by operation id):
+
+explain plan for
+SELECT count(*),
+round(avg(quantity_on_hand)) AVG_AMT,
+product_id, product_name
+FROM inventories natural join product_information
+GROUP BY product_id, product_name
+/
+
+set lines 100
+
+select *
+from table (dbms_xplan.display)
+/
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------
+Plan hash value: 2001125361
+
+--------------------------------------------------------------------------------------------
+| Id  | Operation	     | Name		   | Rows  | Bytes | Cost (%CPU)| Time	   |
+--------------------------------------------------------------------------------------------
+|   0 | SELECT STATEMENT     |			   |   208 | 14976 |	 9  (12)| 00:00:01 |
+|*  1 |  HASH JOIN	     |			   |   208 | 14976 |	 9  (12)| 00:00:01 |
+|   2 |   VIEW		     | VW_GBC_5 	   |   208 | 10816 |	 4  (25)| 00:00:01 |
+|   3 |    HASH GROUP BY     |			   |   208 |  1664 |	 4  (25)| 00:00:01 |
+|   4 |     TABLE ACCESS FULL| INVENTORIES	   |  1112 |  8896 |	 3   (0)| 00:00:01 |
+|   5 |   TABLE ACCESS FULL  | PRODUCT_INFORMATION |   288 |  5760 |	 5   (0)| 00:00:01 |
+
+PLAN_TABLE_OUTPUT
+----------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+Predicate Information (identified by operation id):
+---------------------------------------------------
+
+   1 - access("ITEM_1"="PRODUCT_INFORMATION"."PRODUCT_ID")
+
+Note
+-----
+   - this is an adaptive plan
+
+----- EXception ------
+
+set serveroutput on
+declare
+    snapshot_too_old    exception;
+    pragma exception_init ( snapshot_too_old, -1555);
+begin
+    raise snapshot_too_old;
+exception
+    when snapshot_too_old then
+        dbms_output.put_line ('encountered snapshot too old error');
+    when others then
+        dbms_output.put_line ('encountered other errors');
+        raise;
+end;
+/
+
+
+declare
+    snapshot_too_old    exception;
+    pragma exception_init ( snapshot_too_old, -1555);
+begin
+    dbms_output.put_line (1/0);
+exception
+    when snapshot_too_old then
+        dbms_output.put_line ('encountered snapshot too old error');
+    when others then
+        dbms_output.put_line ('encountered other errors');
+        raise;
+end;
+/
+
+declare
+    snapshot_too_old    exception;
+    pragma exception_init ( snapshot_too_old, -1555);
+begin
+    raise snapshot_too_old;
+end;
+/
+
+
+
+-------
+Day 2
+-------
+
+
+
+--- in sqlplus, edit the line buffer using vi
+
+sql> ed
+
+--- in sqlplus, change the default editor
+
+sql> define _editor=gedit
+
+---- connect to sqlplus from an OS prompt
+ 
+sqlplus oe/cloud_4U@orclpdb1
+
+---- connect to another user within sqlplus
+
+sql> connect oe/cloud_4U@orclpdb1
+
+
+--- for copy and paste of multiline sql in sqlplus ----------
+
+set sqlblanklines on 
+
+------ switch sys account to another pdb in sqlplus ---------
+
+sqlplus / as sysdba
+
+ 
+
+show con_name
+
+show pdbs
+
+alter session set container = orclpdb1
+/
+
+show con_name
+
+
+---------------------------------------------------------------------------------
+--------------- Pipelined Function/ Polymorphic Table (Oracle 19.17 version )---------------------------
+---------------------------------------------------------------------------------
+create or replace package pkg1
+authid definer
+as
+    type typ_ord_tab is table of orders%rowtype;
+    function cust_orders (cust number default 101, disct number default 0) 
+    return typ_ord_tab pipelined;
+end pkg1;
+/
+
+create or replace package body pkg1
+as
+    function cust_orders (cust number default 101, disct number default 0) 
+    return typ_ord_tab pipelined
+    is
+    begin
+        for rec in (select *  from orders where customer_id = cust_orders.cust) loop
+            rec.order_total := rec.order_total * (100 - cust_orders.disct) / 100;
+            pipe row (rec);
+        end loop;
+        return;
+    end;
+end pkg1;
+/
+ 
+select * from pkg1.cust_orders()
+union all
+select * from pkg1.cust_orders(101,10)
+/
+
+select *
+from orders
+/
+---------------------------------------------------------------------------------
+------------- SQL Macro ---------------------------------------------------------
+----------------------------------------------------------------------------------
+
+
+create or replace function budget (job varchar2 default '%CLERK%') 
+return varchar2 sql_macro
+is
+begin
+    return q'{ select department_id, sum(salary), count(*)
+                from employees
+                where job_id like budget.job 
+                group by department_id
+            }';
+end;
+/
+
+select * from budget()
+/
+select * from budget('%MAN%')
+/
+select * from budget('ST_MAN')
+/
+
+select department_id, job_id, sum(salary)
+from employees
+group by department_id, job_id
+/
+
+-------
+Day 1
+-------
+---- associative array ----
+set serveroutput on
+declare
+    type typ_cust_tab is table of customers%rowtype index by varchar2(50);
+    cust_tab typ_cust_tab;
+    ind_name varchar2(50);
+begin
+    for rec in (select * from customers) loop
+        cust_tab(rec.cust_last_name ||', ' || rec.cust_first_name) := rec;
+    end loop;
+    ind_name := cust_tab.FIRST;
+    while ind_name is not null loop
+        dbms_output.put_line(ind_name);
+        ind_name := cust_tab.NEXT(ind_name);
+    end loop;
+    if cust_tab.exists('Alexander, Meena') then
+        dbms_output.put_line('Alexander, Meena found');
+    else 
+        dbms_output.put_line('Alexander, Meena not found');
+    end if;
+    if cust_tab.exists('Alexander, Meen') then
+        dbms_output.put_line('Alexander, Meen found');
+    else 
+        dbms_output.put_line('Alexander, Meen not found');
+    end if;
+    
+end;
+/
+
+
+---------------------------------------------------------------------------------------------------------------------------
+---------------Activity Guide problem notes--------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+
+page 58 / 7 --- 
+
+[oracle@edvmr1p0 labs]$ loadjava -user oe/cloud_4U@ORCLPDB1 FormatCreditCardNo.java 
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+page 78 / b
+
+'insert into card_table (accepted_cards) values
+( :the_card)'
+USING v_cards(j);
+/ --> remove this line 
+END;
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+page 89/4
+
+SELECT count(*)
+INTO v_count
+FROM warehouses;
+v_wh_names.extend(v_count+1); --- modification
+FOR i in 1..v_count LOOP
+
+--------------------------------------------------------------------------------------------------------------------------------
+page 100
+
+Text Search
+VALUE : %ORDERS%
+
+---------------------------------------------------------------------------------------------------------------------------------
+page 110/1.a
+start /home/oracle/labs/labs/lab_11.sql
+---------------------------------------------------------------------------------------------------------------------------------
+page 124/6
+
+set sqlblanklines on
+
+SELECT sales_rep_id, COUNT(*)
+FROM orders
+GROUP BY sales_rep_id;
+
+---------------------------------------------------------------------------------------------------------------------------------
+page 130/a
+SET SERVEROUTPUT ON
+exec get_income_level(‘Kris.Harris@DIPPER.EXAMPLE.COM’) -- retype the single quote
+
+---------------------------------------------------------------------------------------------------------------------------------
+page 131/a
+
+SET SERVEROUTPUT ON
+exec get_income_level(‘Kris.Harris@DIPPER.EXAMPLE.COM’)  -- retype the single quotes
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+

@@ -1,0 +1,31 @@
+sqlplus / as sysdba
+
+
+connect oe/cloud.4U@orclpdb1;
+
+connect oe/cloud_4U@orclpdb1
+
+sqlplus / as sysdba
+
+connect schema/pass@sid
+
+alter user schema  unlock
+
+show pdbs
+
+alter system set pdb=orclpdb1 --must be connected
+
+sqlplus oe/cloud_4U@orclpdb2
+
+set sqlblanklines on
+
+//// creating file container ////
+
+sqlplus / as sysdba
+
+connect / as sysdba
+
+show con_name -- output must be the database where u want to create dbo
+
+if not then:  alter session set container = "SID"
+

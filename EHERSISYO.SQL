@@ -106,3 +106,22 @@ END;
 select first_name, job_id, salary from 
 (select first_name, job_id, salary, rank() over(partition by job_id order by salary desc) rank from employees where salary is not null) ranking
 where rank = 1
+
+--VARRAY
+DECLARE 
+TYPE CUST_VARR IS VARRAY(10) OF NUMBER;
+CUST_ID CUST_VARR := CUST_VARR('1001','1002','1003','1004');
+
+BEGIN 
+
+FOR i in 1 .. CUST_ID.LAST LOOP
+DBMS_OUTPUT.PUT_LINE(CUST_ID(i));
+
+IF CUST_ID(i) = 1003 THEN 
+DBMS_OUTPUT.PUT_LINE('1003 EXIST');
+END IF;
+END LOOP;
+
+DBMS_OUTPUT.PUT_LINE('ARRAY COUNT: ' || CUST_ID.COUNT);
+
+END;
